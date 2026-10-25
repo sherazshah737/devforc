@@ -76,7 +76,7 @@ export const PromoVideo: React.FC = () => (
       );
     })}
     {order.map(([cfg], i) => (
-      <VoiceLine key={i} id={`s${i + 1}`} from={Math.round(cfg.start * FPS) + 6} />
+      <VoiceLine key={i} id={`s${i + 1}`} from={Math.round(cfg.start * FPS) + 9} />
     ))}
     <Music />
   </AbsoluteFill>
