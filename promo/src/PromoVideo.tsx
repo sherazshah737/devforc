@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, interpolate, staticFile} from 'remotion';
 import {TRANSITION_FRAMES} from './components/SceneFrame';
-import {FPS, TOTAL_FRAMES, musicVolume, scenes} from './config';
+import {FPS, TOTAL_FRAMES, musicVolume, scenes, voiceVolume} from './config';
 import './fonts';
 import {useAssetExists} from './lib/assets';
 import {Scene01Expensive} from './scenes/Scene01Expensive';
@@ -34,6 +34,17 @@ const order = [
   [scenes.s13, Scene13Outro],
 ] as const;
 
+const VoiceLine: React.FC<{id: string; from: number}> = ({id, from}) => {
+  const path = `voiceover/${id}.mp3`;
+  const exists = useAssetExists(path, 'audio');
+  if (!exists) return null;
+  return (
+    <Sequence from={from} name={`Voice ${id}`}>
+      <Audio src={staticFile(path)} volume={voiceVolume} />
+    </Sequence>
+  );
+};
+
 const Music: React.FC = () => {
   const exists = useAssetExists('music.mp3', 'audio');
   if (!exists) return null;
@@ -64,6 +75,9 @@ export const PromoVideo: React.FC = () => (
         </Sequence>
       );
     })}
+    {order.map(([cfg], i) => (
+      <VoiceLine key={i} id={`s${i + 1}`} from={Math.round(cfg.start * FPS) + 6} />
+    ))}
     <Music />
   </AbsoluteFill>
 );

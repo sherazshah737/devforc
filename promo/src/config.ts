@@ -56,6 +56,26 @@ export const transitionSeconds = 0.4;
 /** Music volume (0–1). Only used if /public/music.mp3 exists. */
 export const musicVolume = 0.35;
 
+/** Voice-over volume (0–1). Per-scene files at /public/voiceover/s1.mp3 … s13.mp3 are used if present. */
+export const voiceVolume = 1;
+
+/** Narration script, one entry per scene (record/generate each as public/voiceover/sN.mp3). */
+export const voiceScript: Record<string, string> = {
+  s1: 'You think a website is expensive?',
+  s2: 'Truth is, not having one costs more.',
+  s3: 'A customer hears your name, Googles it, finds nothing.',
+  s4: 'So they check Instagram and DM you, just to ask the price.',
+  s5: "Why? Because your competitor's website looks more professional.",
+  s6: 'And the worst part? You never even find out.',
+  s7: 'One day, they just buy from your competitor.',
+  s8: `Do the math. ${prices.customersPerMonth} customers, times ${usd(prices.valuePerCustomer)}, every month. ${usd(monthlyLoss)}.`,
+  s9: `Per year, ${usd(yearlyLoss)}. That's the real cost.`,
+  s10: 'A good website does three things. One: trust. Real work, real reviews. Two: clarity. What, how much, and when it arrives. Three: easy ordering. One tap to WhatsApp.',
+  s11: 'Not just a pretty website. A website that sells.',
+  s12: `Comment ${brand.commentKeyword}, and I'll tell you exactly what your business needs. Totally free.`,
+  s13: 'Follow for more website tips.',
+};
+
 export type Tone = 'light' | 'burgundy';
 
 export const scenes = {
